@@ -1,101 +1,108 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import React, { useState, useEffect } from "react";
+import { FaGithub, FaEnvelope, FaCode, FaChess } from "react-icons/fa";
+import { FcBullish, FcCalculator } from "react-icons/fc";
+
+const LoadingScreen: React.FC<{ isLoading: boolean }> = ({ isLoading }) => (
+  <div id="loading-screen" className={isLoading ? "" : "hidden"}>
+    <div className="spinner"></div>
+  </div>
+);
+
+const Home = () => {
+  const prefersDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const [darkMode, setDarkMode] = useState(prefersDarkMode);
+  const [isLoading, setIsLoading] = useState(true);
+  const [h1Typed, setH1Typed] = useState(false); // Track if h1 typing is done
+  const [h2Typed, setH2Typed] = useState(false); // Track if h2 typing is done
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    document.body.className = darkMode ? "dark-mode" : "";
+  }, [darkMode]);
+
+  // Typewriter effect for h1
+  useEffect(() => {
+    const h1Timer = setTimeout(() => setH1Typed(true), 2000); // Adjust timing as needed
+    return () => clearTimeout(h1Timer);
+  }, []);
+
+  // Typewriter effect for h2 (starts after h1 is done)
+  useEffect(() => {
+    if (h1Typed) {
+      const h2Timer = setTimeout(() => setH2Typed(true), 3000); // Adjust timing as needed
+      return () => clearTimeout(h2Timer);
+    }
+  }, [h1Typed]);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <>
+      <LoadingScreen isLoading={isLoading} />
+      {!isLoading && (
+        <div>
+          {/* Modern Header */}
+          <header>
+            <h1 className={h1Typed ? "finished" : ""}>Thomas Thangarajah</h1>
+            <h2 className={h2Typed ? "finished" : ""}>
+              Computational Mathematics and Statistics at University of Waterloo
+            </h2>
+          </header>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          {/* About Section */}
+          <section id="about">
+            <h3>Welcome to my Portfolio!</h3>
+            <p>
+              I am currently in my third-year at the University of Waterloo, pursuing Computational Mathematics and
+              Statistics. I am looking for an internship for Summer 2025. Check out my projects below!
+            </p>
+          </section>
+
+          {/* Projects Section */}
+          <section id="projects">
+            <h3>Projects</h3>
+            <ul>
+              <li>
+                <h4>CxC Data Hackathon Project <FcBullish /> </h4> 
+                <p>Preprocessed a large dataset and created a Markov Chain model that had an accuracy of 54%.</p>
+                <a href="https://cxc-federato.streamlit.app/" target="_blank">View Dashboard</a>
+              </li>
+              <li>
+                <h4>Research Paper <FcCalculator /> </h4>
+                <p>A research paper created by me and Dr. Peter Zizler from Mount Royal University for data analysis on NBA teams performance using Singular Value Decomposition.</p>
+                <a href="https://github.com/bigballaband/ResearchProject" target="_blank">View Notebook</a>
+              </li>
+              <li>
+                <h4>Chess Game <FaChess /></h4>
+                <p>A group project where we created a Chess game with 3 bots. It includes a text interface and a graphical interface.</p>
+                <a href="https://github.com/bigballaband/Chess" target="_blank">View Github Repo</a>
+              </li>
+            </ul>
+          </section>
+
+          {/* Modern Footer */}
+          <footer>
+            <div className="footer-links">
+              <a href="https://leetcode.com/u/bigballaband/" target="_blank">
+                <FaCode />
+              </a>
+              <a href="https://github.com/bigballaband" target="_blank">
+                <FaGithub />
+              </a>
+              <a href="mailto:tomthaya5@gmail.com">
+                <FaEnvelope />
+              </a>
+            </div>
+            <p>© 2025 Thomas Thangarajah | All Rights Reserved</p>
+          </footer>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      )}
+    </>
   );
-}
+};
+
+export default Home;
