@@ -11,8 +11,6 @@ const LoadingScreen: React.FC<{ isLoading: boolean }> = ({ isLoading }) => (
 );
 
 const Home = () => {
-  const prefersDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const [darkMode, setDarkMode] = useState(prefersDarkMode);
   const [isLoading, setIsLoading] = useState(true);
   const [h1Typed, setH1Typed] = useState(false); // Track if h1 typing is done
   const [h2Typed, setH2Typed] = useState(false); // Track if h2 typing is done
@@ -22,9 +20,10 @@ const Home = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  // Apply dark mode directly
   useEffect(() => {
-    document.body.className = darkMode ? "dark-mode" : "";
-  }, [darkMode]);
+    document.body.className = "dark-mode"; // Permanently set dark mode
+  }, []);
 
   // Typewriter effect for h1
   useEffect(() => {
@@ -67,7 +66,7 @@ const Home = () => {
             <h3>Projects</h3>
             <ul>
               <li>
-                <h4>CxC Data Hackathon Project <FcBullish /> </h4> 
+                <h4>CxC Data Hackathon Project <FcBullish /> </h4>
                 <p>Preprocessed a large dataset and created a Markov Chain model that had an accuracy of 54%.</p>
                 <a href="https://cxc-federato.streamlit.app/" target="_blank">View Dashboard</a>
               </li>
