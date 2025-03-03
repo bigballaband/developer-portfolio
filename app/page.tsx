@@ -20,6 +20,9 @@ const Home = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    document.title = "Thomas Thangarajah's Portfolio";
+  }, []);
   // Apply dark mode directly
   useEffect(() => {
     document.body.className = "dark-mode"; // Permanently set dark mode
