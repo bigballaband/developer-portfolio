@@ -112,6 +112,7 @@ header::before {
 header h1 {
   font-size: 3rem;
   margin: 0 auto;
+  font-family: Snell Roundhand, cursive;
   font-weight: 800;
   letter-spacing: 1.5px;
   overflow: hidden;
@@ -124,6 +125,7 @@ header h1 {
 }
 
 header h2 {
+  font-family: Snell Roundhand, cursive;
   font-size: 1.5rem;
   font-weight: 500;
   opacity: 0.9;
