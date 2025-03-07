@@ -110,7 +110,6 @@ header::before {
 }
 
 header h1 {
-  font-family:SpaceGrotesk-Light;
   font-size: 3rem;
   margin: 0 auto;
   font-weight: 800;
@@ -125,7 +124,6 @@ header h1 {
 }
 
 header h2 {
-  font-family:SpaceGrotesk-Medium;
   font-size: 1.5rem;
   font-weight: 500;
   opacity: 0.9;
