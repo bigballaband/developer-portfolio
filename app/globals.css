@@ -353,3 +353,22 @@ footer {
   }
 }
 
+.powerlifting-videos {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.video {
+  text-align: center;
+}
+
+video {
+  width: 100%; /* Or adjust as needed */
+  max-width: 600px;
+}
+
+h3 {
+  text-align: center;
+}
+

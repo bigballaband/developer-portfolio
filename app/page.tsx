@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { FaGithub, FaEnvelope, FaCode, FaChess } from "react-icons/fa";
 import { FcBullish, FcCalculator } from "react-icons/fc";
+import { GiWeightLiftingUp } from "react-icons/gi";
 
 const LoadingScreen: React.FC<{ isLoading: boolean }> = ({ isLoading }) => (
   <div id="loading-screen" className={isLoading ? "" : "hidden"}>
@@ -86,6 +87,35 @@ const Home = () => {
             </ul>
           </section>
 
+          {/* Powerlifting Section */}
+          <section id="powerlifting">
+            <h3>Powerlifting <GiWeightLiftingUp /></h3>
+            <p>I powerlift a little, trying to get stronger for fun! These clips were from my first meet in December 2024, I will be competing again in June 2025.</p>
+            <div className="powerlifting-videos">
+              <div className="video">
+                <h4>Squat</h4>
+                <video controls>
+                  <source src="/squatmeet.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <div className="video">
+                <h4>Bench Press</h4>
+                <video controls>
+                  <source src="/benchmeet.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <div className="video">
+                <h4>Deadlift</h4>
+                <video controls>
+                  <source src="/deadliftmeet.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+          </section>
+
           {/* Modern Footer */}
           <footer>
             <div className="footer-links">
@@ -101,6 +131,21 @@ const Home = () => {
             </div>
             <p>© 2025 Thomas Thangarajah | All Rights Reserved</p>
           </footer>
+          <style jsx>{`
+            .powerlifting-videos {
+              display: flex;
+              justify-content: space-between;
+              gap: 20px;
+              text-align: center;
+            }
+            .video {
+              flex: 1;
+            }
+            video {
+              width: 100%;
+              border-radius: 10px;
+            }
+          `}</style>
         </div>
       )}
     </>
