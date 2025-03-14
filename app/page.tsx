@@ -7,7 +7,10 @@ import { GiWeightLiftingUp } from "react-icons/gi";
 
 const LoadingScreen: React.FC<{ isLoading: boolean }> = ({ isLoading }) => (
   <div id="loading-screen" className={isLoading ? "" : "hidden"}>
-    <div className="spinner"></div>
+    <div className="holo-text">Loading... Please Wait</div>
+    <div className="holo-progress-container">
+      <div className="holo-progress-bar"></div>
+    </div>
   </div>
 );
 
@@ -90,7 +93,7 @@ const Home = () => {
           {/* Powerlifting Section */}
           <section id="powerlifting">
             <h3>Powerlifting <GiWeightLiftingUp /></h3>
-            <p>I powerlift a little, trying to get stronger for fun! These clips were from my first meet in December 2024, I will be competing again in June 2025.</p>
+            <p>I powerlift a little, trying to get stronger for fun! These clips were from my first meet in December 2024 at the Cowtown Showdown, I will be competing again in June 2025 at Alberta Provincials.</p>
             <div className="powerlifting-videos">
               <div className="video">
                 <h4>Squat</h4>
