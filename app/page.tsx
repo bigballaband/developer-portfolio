@@ -418,6 +418,30 @@ const Home = () => {
             <div className="container">
               <h2 className="section-title">Featured Projects</h2>
               <div className="projects-grid">
+                <div className="project-card lift-chill-card">
+                  <div className="project-header">
+                    <div className="project-header-left">
+                      <img 
+                        src="/liftandchill.png" 
+                        alt="Lift & Chill Logo" 
+                        className="project-card-logo"
+                      />
+                      <h3>Lift & Chill</h3>
+                    </div>
+                  </div>
+                  <p className="project-description">
+                    Track training, sets, and progress with a simple clean app
+                  </p>
+                  <div className="project-links">
+                    <a href="https://lift-and-chill.vercel.app/" target="_blank" rel="noopener noreferrer">
+                      <FaExternalLinkAlt /> Live Site
+                    </a>
+                    <a href="/projects/lift-and-chill">
+                      <FaCode /> View Details
+                    </a>
+                  </div>
+                </div>
+
                 <div className="project-card">
                   <div className="project-header">
                     <h3>Powerlifter Pro</h3>
@@ -511,11 +535,11 @@ const Home = () => {
                     <span className="tech-tag">AI/ML</span>
                   </div>
                   <div className="project-links">
-                    <a href="https://github.com/bigballaband/smartsred" target="_blank" rel="noopener noreferrer">
-                      <FaGithub /> SmartSRED
+                    <a href="https://smartsred.ca" target="_blank" rel="noopener noreferrer">
+                      <FaExternalLinkAlt /> SmartSRED
                     </a>
-                    <a href="https://github.com/bigballaband/inventgenie" target="_blank" rel="noopener noreferrer">
-                      <FaGithub /> InventGenie
+                    <a href="https://inventgenie.com" target="_blank" rel="noopener noreferrer">
+                      <FaExternalLinkAlt /> InventGenie
                     </a>
                   </div>
                 </div>
