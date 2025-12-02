@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import HeroBackground from "../components/HeroBackground";
 import { 
   FaGithub, 
   FaEnvelope, 
@@ -45,15 +46,6 @@ import {
   SiJupyter,
   SiStreamlit
 } from "react-icons/si";
-
-const LoadingScreen: React.FC<{ isLoading: boolean }> = ({ isLoading }) => (
-  <div id="loading-screen" className={isLoading ? "" : "hidden"}>
-    <div className="holo-text">Loading... Please Wait</div>
-    <div className="holo-progress-container">
-      <div className="holo-progress-bar"></div>
-    </div>
-  </div>
-);
 
 const Navigation: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -117,43 +109,43 @@ const SkillsSection: React.FC = () => {
     {
       title: "Programming Languages",
       skills: [
-        { name: "Python", icon: FaPython, level: 95 },
-        { name: "TypeScript", icon: SiTypescript, level: 90 },
-        { name: "JavaScript", icon: FaJs, level: 90 },
-        { name: "C++", icon: FaCode, level: 85 },
-        { name: "C#", icon: FaCode, level: 80 },
-        { name: "R", icon: FaCode, level: 85 }
+        { name: "Python", icon: FaPython, level: "strong" },
+        { name: "TypeScript", icon: SiTypescript, level: "strong" },
+        { name: "JavaScript", icon: FaJs, level: "strong" },
+        { name: "C++", icon: FaCode, level: "comfortable" },
+        { name: "C#", icon: FaCode, level: "comfortable" },
+        { name: "R", icon: FaCode, level: "comfortable" }
       ]
     },
     {
       title: "Web Development",
       skills: [
-        { name: "React", icon: FaReact, level: 95 },
-        { name: "Next.js", icon: SiNextdotjs, level: 90 },
-        { name: "Node.js", icon: SiNodedotjs, level: 85 },
-        { name: "React Native", icon: FaReact, level: 85 },
-        { name: "HTML/CSS", icon: FaCode, level: 95 }
+        { name: "React", icon: FaReact, level: "strong" },
+        { name: "Next.js", icon: SiNextdotjs, level: "strong" },
+        { name: "Node.js", icon: SiNodedotjs, level: "comfortable" },
+        { name: "React Native", icon: FaReact, level: "comfortable" },
+        { name: "HTML/CSS", icon: FaCode, level: "strong" }
       ]
     },
     {
       title: "Data & AI/ML",
       skills: [
-        { name: "SQL", icon: FaDatabase, level: 95 },
-        { name: "PostgreSQL", icon: SiPostgresql, level: 90 },
-        { name: "Supabase", icon: FaDatabase, level: 85 },
-        { name: "RAG", icon: FaCode, level: 80 },
-        { name: "LangChain", icon: FaCode, level: 75 },
-        { name: "Pandas", icon: SiPandas, level: 90 }
+        { name: "SQL", icon: FaDatabase, level: "strong" },
+        { name: "PostgreSQL", icon: SiPostgresql, level: "strong" },
+        { name: "Supabase", icon: FaDatabase, level: "comfortable" },
+        { name: "RAG", icon: FaCode, level: "comfortable" },
+        { name: "LangChain", icon: FaCode, level: "learning" },
+        { name: "Pandas", icon: SiPandas, level: "strong" }
       ]
     },
     {
       title: "Tools & Technologies",
       skills: [
-        { name: "Git", icon: SiGit, level: 90 },
-        { name: "Linux", icon: SiLinux, level: 85 },
-        { name: "Firebase", icon: FaCloud, level: 85 },
-        { name: "MySQL", icon: SiMongodb, level: 80 },
-        { name: "Oracle", icon: FaDatabase, level: 75 }
+        { name: "Git", icon: SiGit, level: "strong" },
+        { name: "Linux", icon: SiLinux, level: "comfortable" },
+        { name: "Firebase", icon: FaCloud, level: "comfortable" },
+        { name: "MySQL", icon: SiMongodb, level: "comfortable" },
+        { name: "Oracle", icon: FaDatabase, level: "learning" }
       ]
     }
   ];
@@ -173,13 +165,11 @@ const SkillsSection: React.FC = () => {
                       <skill.icon className="skill-icon" />
                       <span className="skill-name">{skill.name}</span>
                     </div>
-                    <div className="skill-bar">
-                      <div 
-                        className="skill-progress" 
-                        style={{ width: `${skill.level}%` }}
-                      ></div>
+                    <div className="skill-tags">
+                      <span className={`skill-tag ${skill.level}`}>
+                        {skill.level === "strong" ? "Strong" : skill.level === "comfortable" ? "Comfortable" : "Learning"}
+                      </span>
                     </div>
-                    <span className="skill-level">{skill.level}%</span>
                   </div>
                 ))}
               </div>
@@ -255,14 +245,8 @@ const ExperienceSection: React.FC = () => {
 };
 
 const Home = () => {
-  const [isLoading, setIsLoading] = useState(true);
   const [h1Typed, setH1Typed] = useState(false);
   const [h2Typed, setH2Typed] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 2000);
-    return () => clearTimeout(timer);
-  }, []);
 
   useEffect(() => {
     document.title = "Thomas Thangarajah's Portfolio";
@@ -285,22 +269,25 @@ const Home = () => {
   }, [h1Typed]);
 
   return (
-    <>
-      <LoadingScreen isLoading={isLoading} />
-      {!isLoading && (
-        <div>
-          <Navigation />
+    <div>
+      <div className="math-pattern"></div>
+      <Navigation />
           
           {/* Modern Hero Section */}
-          <header className="hero-section">
-            <div className="hero-content">
+          <header className="hero-section relative overflow-hidden">
+            <HeroBackground />
+            <div className="hero-content relative z-10">
             <h1 className={h1Typed ? "finished" : ""}>Thomas Thangarajah</h1>
             <h2 className={h2Typed ? "finished" : ""}>
                 Computational Mathematics & Statistics at University of Waterloo
             </h2>
+              <div className="hero-chips">
+                <span className="hero-chip">Software Developer</span>
+                <span className="hero-chip">Math & Data</span>
+                <span className="hero-chip">Powerlifting</span>
+              </div>
               <p className="hero-description">
-                Software Developer at Dasens AI with expertise in AI/ML, full-stack development, and statistical analysis. 
-                Seeking Summer 2026 internship opportunities to further develop my skills in innovative technology solutions.
+                Building AI tools and data systems at Dasens AI. I like clean dashboards, mathy problems, and gym apps that actually work.
               </p>
               <div className="hero-buttons">
                 <a href="#contact" className="btn btn-primary">Get In Touch</a>
@@ -318,21 +305,16 @@ const Home = () => {
               <div className="about-content">
                 <div className="about-text">
                   <p>
-                    I'm a third-year Computational Mathematics and Statistics student at the University of Waterloo, 
-                    currently working as a Software Developer at Dasens AI. I have a strong foundation in mathematical 
-                    modeling, statistical analysis, and computational methods, with hands-on experience building 
-                    AI-powered SaaS platforms and mobile applications.
+                    I'm a math student at Waterloo who builds things. Right now I'm at Dasens AI working on AI tools and data systems. 
+                    I like building stuff that people actually use, whether that's dashboards for clients or apps for tracking training.
                   </p>
                   <p>
-                    My professional journey combines rigorous mathematical training with real-world experience in machine learning, 
-                    full-stack development, and statistical analysis. I've successfully launched AI SaaS platforms serving 10+ 
-                    business clients, built React Native mobile apps with 200+ active users, and conducted research 
-                    presented at international conferences. I'm actively seeking Summer 2026 internship opportunities 
-                    to further expand my technical expertise and contribute to innovative projects.
+                    Most of my work is in AI, data, and backend systems. I've shipped a couple SaaS platforms, built mobile apps, 
+                    and done some research that got presented at conferences. I enjoy clean interfaces and problems that need math to solve.
                   </p>
                   <p>
-                    Beyond academics, I'm an active powerlifter and enjoy the discipline and goal-setting that comes with 
-                    competitive sports. This mindset translates to my approach to problem-solving and project management.
+                    When I'm not coding, I'm usually at the gym. I compete in powerlifting and track everything: RPE, meet results, 
+                    the works. That same attention to detail shows up in how I build products.
                   </p>
                   <div className="about-highlights">
                     <div className="highlight-item">
@@ -379,14 +361,6 @@ const Home = () => {
                 </div>
                 <div className="achievement-card">
                   <div className="achievement-icon">
-                    <FaWeightHanging />
-                  </div>
-                  <h3>Powerlifting Competitor</h3>
-                  <p>Alberta Provincials Qualifier</p>
-                  <span className="achievement-period">December 2024</span>
-                </div>
-                <div className="achievement-card">
-                  <div className="achievement-icon">
                     <FaChartLine />
                   </div>
                   <h3>Research Presentations</h3>
@@ -429,9 +403,16 @@ const Home = () => {
                       <h3>Lift & Chill</h3>
                     </div>
                   </div>
+                  <p className="project-flavor">Built this because spreadsheets for training were getting annoying.</p>
                   <p className="project-description">
-                    Track training, sets, and progress with a simple clean app
+                    Track training, sets, and progress with a simple clean app. Calendar view, progress charts, and full exercise history.
                   </p>
+                  <div className="project-tech">
+                    <span className="tech-tag">React</span>
+                    <span className="tech-tag">Next.js</span>
+                    <span className="tech-tag">TypeScript</span>
+                    <span className="tech-tag">Supabase</span>
+                  </div>
                   <div className="project-links">
                     <a href="https://lift-and-chill.vercel.app/" target="_blank" rel="noopener noreferrer">
                       <FaExternalLinkAlt /> Live Site
@@ -444,24 +425,23 @@ const Home = () => {
 
                 <div className="project-card">
                   <div className="project-header">
-                    <h3>Powerlifter Pro</h3>
-                    <FaWeightHanging className="project-icon" />
+                    <h3>EMA Crossover Backtest</h3>
+                    <FaChartLine className="project-icon" />
                   </div>
+                  <p className="project-flavor">Wanted to see if simple moving averages could actually work for trading.</p>
                   <p className="project-description">
-                    Developed a cross-platform app for powerlifters to log lifts, track progress, and receive AI-driven 
-                    programming recommendations. Implemented RPE-based autoregulation with Node.js + PostgreSQL backend, 
-                    delivering personalized training load suggestions for optimal performance tracking.
+                    A trading strategy backtest built in Python that uses fast and slow EMAs to create signals. Includes equity curves, drawdowns, Sharpe ratio, and walk-forward testing.
                   </p>
                   <div className="project-tech">
-                    <span className="tech-tag">Node.js</span>
-                    <span className="tech-tag">PostgreSQL</span>
-                    <span className="tech-tag">React Native</span>
-                    <span className="tech-tag">AI/ML</span>
-                    <span className="tech-tag">RPE System</span>
+                    <span className="tech-tag">Python</span>
+                    <span className="tech-tag">Pandas</span>
+                    <span className="tech-tag">Matplotlib</span>
+                    <span className="tech-tag">yfinance</span>
+                    <span className="tech-tag">Jupyter</span>
                   </div>
                   <div className="project-links">
-                    <a href="https://github.com/bigballaband/powerlifter-pro" target="_blank" rel="noopener noreferrer">
-                      <FaGithub /> Repository
+                    <a href="/projects/ema-crossover-backtest">
+                      <FaCode /> View Project
                     </a>
                   </div>
                 </div>
@@ -471,10 +451,9 @@ const Home = () => {
                     <h3>CxC Data Hackathon</h3>
                     <FcBullish className="project-icon" />
                   </div>
+                  <p className="project-flavor">Markov chains for recommendations - surprisingly effective.</p>
                   <p className="project-description">
-                    Built a recommendation engine using Markov chains + ML, achieving 70% top-N accuracy. 
-                    Delivered insights via a Streamlit dashboard for the University of Waterloo Data Science Club. 
-                    Implemented advanced statistical modeling and data visualization techniques.
+                    Built a recommendation engine using Markov chains + ML, achieving 70% top-N accuracy. Delivered insights via a Streamlit dashboard for the University of Waterloo Data Science Club.
                   </p>
                   <div className="project-tech">
                     <span className="tech-tag">Python</span>
@@ -498,10 +477,9 @@ const Home = () => {
                     <h3>NBA/MLB Performance Analysis</h3>
                     <FcCalculator className="project-icon" />
                   </div>
+                  <p className="project-flavor">PCA on 50k+ game records - math that actually works.</p>
                   <p className="project-description">
-                    Applied SVD and PCA to 50k+ NBA/MLB game records, reducing feature space from 30 to 5 components 
-                    while retaining 80% variance. Built predictive models and interactive visualizations. 
-                    Presented findings at YYCDATACON 2025 and International Conference on Statistics and Data Science (SFU).
+                    Applied SVD and PCA to 50k+ NBA/MLB game records, reducing feature space from 30 to 5 components while retaining 80% variance. Built predictive models and interactive visualizations.
                   </p>
                   <div className="project-tech">
                     <span className="tech-tag">Python</span>
@@ -522,10 +500,9 @@ const Home = () => {
                     <h3>SmartSRED & InventGenie</h3>
                     <FaCode className="project-icon" />
                   </div>
+                  <p className="project-flavor">Two AI SaaS platforms that clients actually use.</p>
                   <p className="project-description">
-                    Launched two AI SaaS platforms serving 10+ business clients; reduced SR&ED claim prep time by 40% 
-                    and built RAG-based patent drafting engine. Designed React/Next.js dashboards backed by Supabase, 
-                    improving client data access and onboarding speed with 2-minute setup.
+                    Launched two AI SaaS platforms serving 10+ business clients. Reduced SR&ED claim prep time by 40% and built RAG-based patent drafting engine. React/Next.js dashboards with 2-minute setup.
                   </p>
                   <div className="project-tech">
                     <span className="tech-tag">React</span>
@@ -550,13 +527,32 @@ const Home = () => {
           {/* Powerlifting Section */}
           <section id="powerlifting" className="powerlifting-section">
             <div className="container">
-              <h2 className="section-title">Powerlifting Journey <FaWeightHanging /></h2>
+              <h2 className="section-title">Powerlifting <FaWeightHanging /></h2>
               <p className="section-description">
-                I competed in June at Provincials and I am competing in October for Westerns. 
+                I compete and track everything: RPE, meet results, the works. 
                 Follow my training journey on Instagram!
               </p>
               <div className="powerlifting-content">
                 <div className="powerlifting-card">
+                  <h3 style={{ marginBottom: '1rem', color: 'var(--text-primary)' }}>Competition History</h3>
+                  <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', lineHeight: '1.7' }}>
+                    Competing at Nationals in March in 105-jr class. 
+                    I track all my training, RPE, and meet results.
+                  </p>
+                  <div className="powerlifting-stats">
+                    <div className="powerlifting-stat">
+                      <div className="powerlifting-stat-label">Squat</div>
+                      <div className="powerlifting-stat-value">255kg</div>
+                    </div>
+                    <div className="powerlifting-stat">
+                      <div className="powerlifting-stat-label">Bench</div>
+                      <div className="powerlifting-stat-value">170kg</div>
+                    </div>
+                    <div className="powerlifting-stat">
+                      <div className="powerlifting-stat-label">Deadlift</div>
+                      <div className="powerlifting-stat-value">267.5kg</div>
+                    </div>
+                  </div>
                   <div className="powerlifting-social">
                     <a href="https://instagram.com/bigballabandlife" target="_blank" rel="noopener noreferrer" className="instagram-link">
                       <FaInstagram />
@@ -573,9 +569,8 @@ const Home = () => {
             <div className="container">
               <h2 className="section-title">Let's Connect</h2>
               <p className="contact-description">
-                I'm actively seeking Summer 2026 internship opportunities in software engineering, data science, 
-                and machine learning. I'm always interested in new opportunities, collaborations, and challenging projects. 
-                Let's discuss how we can work together!
+                Looking for Summer 2026 internships in software engineering, data science, and machine learning. 
+                Always open to new opportunities and interesting projects.
               </p>
               <div className="contact-info">
                 <div className="contact-item">
@@ -649,15 +644,13 @@ const Home = () => {
                 </div>
               </div>
               <div className="footer-bottom">
-                <p>&copy; 2025 Thomas Thangarajah. All rights reserved. | Seeking Summer 2026 Internships</p>
+                <p>&copy; 2025 Thomas Thangarajah. Seeking Summer 2026 Internships.</p>
               </div>
             </div>
           </footer>
           
-          <ScrollToTop />
-        </div>
-      )}
-    </>
+      <ScrollToTop />
+    </div>
   );
 };
 
